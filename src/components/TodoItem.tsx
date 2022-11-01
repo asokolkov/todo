@@ -1,4 +1,4 @@
-import TodoItemModel from "../models/TodoItemModel";
+import TodoItemModel from '../models/TodoItemModel';
 
 type PropsTypes = {
     model: TodoItemModel;

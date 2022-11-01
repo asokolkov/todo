@@ -1,7 +1,7 @@
-import React from "react";
-import {observer} from "mobx-react-lite";
-import {TodoListModel} from "../models/TodoListModel";
-import {TodoItem} from "./TodoItem";
+import React from 'react';
+import {observer} from 'mobx-react-lite';
+import {TodoListModel} from '../models/TodoListModel';
+import {TodoItem} from './TodoItem';
 
 type PropsTypes = {
     model: TodoListModel;

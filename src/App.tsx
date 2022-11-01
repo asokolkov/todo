@@ -1,6 +1,6 @@
-import React from "react";
-import {TodoList} from "./components/TodoList";
-import {TodoListModel} from "./models/TodoListModel";
+import React from 'react';
+import {TodoList} from './components/TodoList';
+import {TodoListModel} from './models/TodoListModel';
 
 const App = () => {
     const todoListModel = new TodoListModel(['Todo 1', 'Todo 2']);
