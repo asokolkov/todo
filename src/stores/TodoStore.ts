@@ -1,4 +1,4 @@
-import {action, makeObservable, observable} from "mobx";
+import {action, makeObservable, observable} from 'mobx';
 import {v4 as uuid} from 'uuid';
 
 type TodoType = {
@@ -18,17 +18,20 @@ export class TodoStore {
         '3': {text: 'Highlight mistakes', completed: false, focus: false}
     };
 
+    placeholder = 'Input task';
+
     constructor () {
         makeObservable(this, {
             todos: observable,
             addTodo: action,
             removeTodo: action,
-            changeText: action
+            changeText: action,
+            toggleCompleted: action
         });
     }
 
-    addTodo(text: string, focus: boolean) {
-        this.todos[uuid()] = {text: text, completed: false, focus: focus};
+    addTodo(focus: boolean = true) {
+        this.todos[uuid()] = {text: '', completed: false, focus: focus};
     }
 
     removeTodo(id: string) {
@@ -37,5 +40,9 @@ export class TodoStore {
 
     changeText(id: string, text: string) {
         this.todos[id].text = text;
+    }
+
+    toggleCompleted(id: string) {
+        this.todos[id].completed = !this.todos[id].completed;
     }
 }

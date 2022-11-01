@@ -1,25 +1,15 @@
-import React from 'react';
-import {TodoStore} from "../stores/TodoStore";
+import React, {useContext} from 'react';
 import {observer} from "mobx-react-lite";
 import {TodoItem} from "./TodoItem";
+import {StoreContext} from "../context/context";
 
-type PropsTypes = {
-    store: TodoStore;
-};
+const TodoList = () => {
+    const store = useContext(StoreContext);
 
-const TodoList = ({store} : PropsTypes) => {
     return (
         <div>
-            {Object.entries(store.todos).map(([id, todo]) => (
-                <TodoItem
-                    key={id}
-                    id={id}
-                    todo={todo}
-                    removeTodo={() => store.removeTodo(id)}
-                    changeText={(id, text) => store.changeText(id, text)}
-                />
-            ))}
-            <button onClick={() => store.addTodo('awdawd', true)}>Add</button>
+            {Object.keys(store.todos).map(id => <TodoItem key={id} id={id} />)}
+            <button onClick={() => store.addTodo()}>Add</button>
         </div>
     );
 };
