@@ -1,16 +1,27 @@
-import TodoItemModel from '../models/TodoItemModel';
+import React from 'react';
 
-type PropsTypes = {
-    model: TodoItemModel;
-    removeTodo: (todo: TodoItemModel) => void;
+type TodoType = {
+    text: string;
+    completed: boolean;
+    focus: boolean;
 };
 
-export const TodoItem = ({model, removeTodo}: PropsTypes) => {
+type PropsTypes = {
+    id: string;
+    todo: TodoType;
+    changeText: (key: string, text: string) => void;
+    removeTodo: () => void;
+};
+
+export const TodoItem = ({id, todo, removeTodo, changeText}: PropsTypes) => {
     return (
         <div>
-            <input type="checkbox" onClick={model.toggleDone} />
-            <p>{model.text}</p>
-            <button onClick={() => removeTodo(model)}>x</button>
+            <input
+                onChange={(e) => changeText(id, e.target.value)}
+                defaultValue={todo.text}
+                autoFocus={todo.focus}
+            />
+            <button onClick={removeTodo}>x</button>
         </div>
-    )
+    );
 };

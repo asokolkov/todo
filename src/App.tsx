@@ -1,15 +1,13 @@
 import React from 'react';
-import {TodoList} from './components/TodoList';
-import {TodoListModel} from './models/TodoListModel';
+import {TodoStore} from "./stores/TodoStore";
+import TodoList from "./components/TodoList";
 
-const App = () => {
-    const todoListModel = new TodoListModel(['Todo 1', 'Todo 2']);
+export const App = () => {
+    const store = new TodoStore();
 
     return (
         <div>
-            <TodoList model={todoListModel} />
+            <TodoList store={store} />
         </div>
     );
 };
-
-export default App;

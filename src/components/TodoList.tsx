@@ -1,14 +1,27 @@
 import React from 'react';
-import {observer} from 'mobx-react-lite';
-import {TodoListModel} from '../models/TodoListModel';
-import {TodoItem} from './TodoItem';
+import {TodoStore} from "../stores/TodoStore";
+import {observer} from "mobx-react-lite";
+import {TodoItem} from "./TodoItem";
 
 type PropsTypes = {
-    model: TodoListModel;
+    store: TodoStore;
 };
 
-export const TodoList = observer(({model} : PropsTypes) => (
-    <div>
-        {model.list.map(todo => <TodoItem key={todo.id} model={todo} removeTodo={model.removeTodo} />)}
-    </div>
-));
+const TodoList = ({store} : PropsTypes) => {
+    return (
+        <div>
+            {Object.entries(store.todos).map(([id, todo]) => (
+                <TodoItem
+                    key={id}
+                    id={id}
+                    todo={todo}
+                    removeTodo={() => store.removeTodo(id)}
+                    changeText={(id, text) => store.changeText(id, text)}
+                />
+            ))}
+            <button onClick={() => store.addTodo('awdawd', true)}>Add</button>
+        </div>
+    );
+};
+
+export default observer(TodoList);
