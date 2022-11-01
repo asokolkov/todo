@@ -1,11 +1,8 @@
 import React, {useContext} from 'react';
-import {StoreContext} from "../context/context";
+import {StoreContext} from '../context/context';
+import {TodoItemPropsTypes} from '../types/todoItemPropsTypes';
 
-type PropsTypes = {
-    id: string;
-};
-
-export const TodoItem = ({id}: PropsTypes) => {
+export const TodoItem = ({id}: TodoItemPropsTypes) => {
     const store = useContext(StoreContext);
 
     return (

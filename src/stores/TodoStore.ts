@@ -1,20 +1,8 @@
 import {action, makeObservable, observable} from 'mobx';
 import {v4 as uuid} from 'uuid';
-
-type TodoType = {
-    text: string;
-    completed: boolean;
-    focus: boolean;
-};
-
-type TodosType = {
-    [id: string]: TodoType;
-};
-
-type FilterType = {
-    type: string;
-    func: (todo: TodoType) => boolean;
-};
+import {FilterType} from '../enums/filterType';
+import {TodosType} from '../types/todosTypes';
+import {FiltersTypes} from '../types/filtersTypes';
 
 export class TodoStore {
     todos: TodosType = {
@@ -24,11 +12,13 @@ export class TodoStore {
     };
     activeTodos = this.todos;
 
-    filters: FilterType[] = [
-        {type: 'Completed', func: todo => todo.completed},
-        {type: 'Not completed', func: todo => !todo.completed}
-    ];
-    currentFilter: FilterType = {type: 'No filter', func: () => true};
+    filters: FiltersTypes = {
+        current: {type: FilterType.NO_FILTER, func: () => true},
+        other: [
+            {type: FilterType.COMPLETED, func: todo => todo.completed},
+            {type: FilterType.NOT_COMPLETED, func: todo => !todo.completed}
+        ]
+    };
 
     placeholder = 'Input task';
 
@@ -37,7 +27,6 @@ export class TodoStore {
             todos: observable,
             activeTodos: observable,
             filters: observable,
-            currentFilter: observable,
             addTodo: action,
             removeTodo: action,
             changeText: action,
@@ -47,12 +36,15 @@ export class TodoStore {
     }
 
     addTodo(focus: boolean = true) {
-        const todo = {text: '', completed: false, focus: focus, hidden: false};
-        todo.hidden = this.currentFilter.func(todo);
-        this.todos[uuid()] = todo;
+        const id = uuid();
+        const todo = {text: '', completed: false, focus: focus};
+        this.todos[id] = todo;
+        this.activeTodos[id] = todo;
+        while (this.filters.current.type !== FilterType.NO_FILTER) this.toggleFilter();
     }
 
     removeTodo(id: string) {
+        delete this.activeTodos[id];
         delete this.todos[id];
     }
 
@@ -63,14 +55,14 @@ export class TodoStore {
     toggleCompleted(id: string) {
         this.todos[id].completed = !this.todos[id].completed;
         this.activeTodos = Object.fromEntries(Object.entries(this.todos)
-            .filter(([, todo]) => this.currentFilter.func(todo)));
+            .filter(([, todo]) => this.filters.current.func(todo)));
     }
 
     toggleFilter() {
-        const previousFilter = this.currentFilter;
-        this.currentFilter = this.filters.pop()!;
-        this.filters.unshift(previousFilter);
+        const previousFilter = this.filters.current;
+        this.filters.current = this.filters.other.pop()!;
+        this.filters.other.unshift(previousFilter);
         this.activeTodos = Object.fromEntries(Object.entries(this.todos)
-            .filter(([, todo]) => this.currentFilter.func(todo)));
+            .filter(([, todo]) => this.filters.current.func(todo)));
     }
 }
