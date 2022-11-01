@@ -12,6 +12,7 @@ export const TodoItem = ({id}: PropsTypes) => {
         <div>
             <input
                 type="checkbox"
+                checked={store.todos[id].completed}
                 onChange={() => store.toggleCompleted(id)}
             />
             <input

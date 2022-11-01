@@ -8,7 +8,9 @@ const TodoList = () => {
 
     return (
         <div>
-            {Object.keys(store.todos).map(id => <TodoItem key={id} id={id} />)}
+            <h1>TodoList</h1>
+            <button onClick={() => store.toggleFilter()}>{store.currentFilter.type}</button>
+            {Object.keys(store.activeTodos).map(id => <TodoItem key={id} id={id} />)}
             <button onClick={() => store.addTodo()}>Add</button>
         </div>
     );
