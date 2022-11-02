@@ -7,7 +7,7 @@ $transitionTime: .3s;
 
 $mainColor: #2F2F2F;
 $hoverColor: #b6b6b6;
-$checkedColor: #666;
+$checkedColor: #777;
 
 body {
     margin: 0;
@@ -16,6 +16,7 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    user-select: none;
 }
 
 body::-webkit-scrollbar {

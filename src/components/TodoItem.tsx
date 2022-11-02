@@ -1,6 +1,7 @@
 import React from 'react';
 import {TodoItemPropsTypes} from '../types/todoItemPropsTypes';
 
+
 export const TodoItem = ({id, store}: TodoItemPropsTypes) => {
     return (
         <div className="TodoItem">

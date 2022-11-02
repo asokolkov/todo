@@ -1,6 +1,7 @@
 import {FilterType} from '../enums/filterType';
 import {TodoType} from '../types/todoType';
 
+
 export class TodoFilter {
     private currentIndex = 0;
 
