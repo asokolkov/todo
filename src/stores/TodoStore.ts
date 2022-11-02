@@ -34,19 +34,16 @@ export class TodoStore {
         this.updateActiveTodos();
     }
 
-
     removeTodo(id: string) {
         delete this.activeTodos[id];
         delete this.todos[id];
         this.saveCookies();
     }
 
-
     changeText(id: string, text: string) {
         this.todos[id].text = text;
         this.saveCookies();
     }
-
 
     toggleCompleted(id: string) {
         this.todos[id].completed = !this.todos[id].completed;
