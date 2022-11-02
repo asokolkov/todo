@@ -19,13 +19,13 @@ export class TodoStore {
         makeAutoObservable(this);
     }
 
-    addTodo(focus: boolean = true) {
+    addTodo() {
         const id = uuid();
-        const todo = {text: '', completed: false, focus: focus};
+        const todo = {text: '', completed: false, focus: true};
         this.todos[id] = todo;
         this.activeTodos[id] = todo;
         this.filter.setFirst();
-        this.redrawActiveTodos();
+        this.updateActiveTodos();
     }
 
     removeTodo(id: string) {
@@ -39,15 +39,15 @@ export class TodoStore {
 
     toggleCompleted(id: string) {
         this.todos[id].completed = !this.todos[id].completed;
-        this.redrawActiveTodos();
+        this.updateActiveTodos();
     }
 
     toggleFilter() {
         this.filter.next();
-        this.redrawActiveTodos();
+        this.updateActiveTodos();
     }
 
-    redrawActiveTodos() {
+    updateActiveTodos() {
         this.activeTodos = Object.fromEntries(Object.entries(this.todos)
             .filter(([, todo]) => this.filter.check(todo)));
     }
