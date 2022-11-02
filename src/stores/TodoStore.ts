@@ -24,7 +24,8 @@ export class TodoStore {
         const todo = {text: '', completed: false, focus: focus};
         this.todos[id] = todo;
         this.activeTodos[id] = todo;
-        while (!this.filter.isFirst()) this.toggleFilter();
+        this.filter.setFirst();
+        this.redrawActiveTodos();
     }
 
     removeTodo(id: string) {
