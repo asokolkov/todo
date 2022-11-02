@@ -5,9 +5,9 @@ import {TodoFilter} from './TodoFilter';
 
 export class TodoStore {
     todos: TodosType = {
-        '1': {text: 'Quit the job', completed: false, focus: false},
-        '2': {text: 'Visit Amsterdam', completed: false, focus: false},
-        '3': {text: 'Highlight mistakes', completed: false, focus: false}
+        '1': {text: 'Quit the job', completed: false},
+        '2': {text: 'Visit Amsterdam', completed: false},
+        '3': {text: 'Highlight mistakes', completed: false}
     };
     activeTodos = this.todos;
 
@@ -19,9 +19,14 @@ export class TodoStore {
         makeAutoObservable(this);
     }
 
+    shouldFocus(id: string) {
+        const lastTodoId = Object.keys(this.todos).pop();
+        return id === lastTodoId && this.todos[lastTodoId].text === '';
+    }
+
     addTodo() {
         const id = uuid();
-        const todo = {text: '', completed: false, focus: true};
+        const todo = {text: '', completed: false};
         this.todos[id] = todo;
         this.activeTodos[id] = todo;
         this.filter.setFirst();

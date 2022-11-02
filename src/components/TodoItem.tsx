@@ -17,7 +17,7 @@ export const TodoItem = ({id}: TodoItemPropsTypes) => {
                 onChange={e => store.changeText(id, e.target.value)}
                 defaultValue={store.todos[id].text}
                 placeholder={store.placeholder}
-                autoFocus={store.todos[id].focus}
+                autoFocus={store.shouldFocus(id)}
             />
             <button className="s-button" onClick={() => store.removeTodo(id)}>x</button>
         </div>
