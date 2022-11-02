@@ -1,23 +1,25 @@
-import React, {useContext} from 'react';
-import {observer} from 'mobx-react-lite';
+import React from 'react';
 import {TodoItem} from './TodoItem';
-import {StoreContext} from '../context/context';
+import {TodoStore} from '../stores/TodoStore';
+import {Observer} from 'mobx-react-lite';
 
 const TodoList = () => {
-    const store = useContext(StoreContext);
+    const store = new TodoStore();
 
     return (
-        <div className="TodoList">
-            <h1>TodoList</h1>
-            <button className="l-button" onClick={() => store.toggleFilter()}>
-                {store.filter.getCurrentType()}
-            </button>
-            {Object.keys(store.activeTodos).map(id => <TodoItem key={id} id={id} />)}
-            <button className="l-button" onClick={() => store.addTodo()}>
-                Add
-            </button>
-        </div>
+        <Observer>{() => (
+            <div className="TodoList">
+                <h1>TodoList</h1>
+                <button className="l-button" onClick={() => store.toggleFilter()}>
+                    {store.filter.getCurrentType()}
+                </button>
+                {Object.keys(store.activeTodos).map(id => <TodoItem key={id} id={id} store={store} />)}
+                <button className="l-button" onClick={() => store.addTodo()}>
+                    Add
+                </button>
+            </div>
+        )}</Observer>
     );
 };
 
-export default observer(TodoList);
+export default TodoList;

@@ -1,10 +1,7 @@
-import React, {useContext} from 'react';
-import {StoreContext} from '../context/context';
+import React from 'react';
 import {TodoItemPropsTypes} from '../types/todoItemPropsTypes';
 
-export const TodoItem = ({id}: TodoItemPropsTypes) => {
-    const store = useContext(StoreContext);
-
+export const TodoItem = ({id, store}: TodoItemPropsTypes) => {
     return (
         <div className="TodoItem">
             <input
