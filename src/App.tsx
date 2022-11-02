@@ -4,7 +4,7 @@ import TodoList from './components/TodoList';
 import {StoreContext} from './context/context';
 
 export const App = () => (
-    <div className="App">
+    <div>
         <StoreContext.Provider value={new TodoStore()}>
             <TodoList />
         </StoreContext.Provider>
