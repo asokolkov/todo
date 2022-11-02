@@ -56,33 +56,6 @@ button:hover {
     background-color: $hoverColor;
 }
 
-.TodoList {
-    display: flex;
-    width: $elementWidth;
-    margin: 100px auto;
-    flex-flow: column;
-    text-align: center;
-    gap: 10px;
-}
-
-.TodoItem {
-    display: flex;
-    height: $squareSize;
-}
-
-.l-button {
-    width: 100%;
-    height: $squareSize;
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.s-button {
-    margin: auto 0 auto 5px;
-    font-size: 25px;
-    font-weight: 600;
-}
-
 input[type=text] {
     margin: 0 auto;
     width: 60%;
@@ -112,4 +85,74 @@ input[type=checkbox]:hover {
 
 input[type=checkbox]:checked {
     background-color: $checkedColor;
+}
+
+.TodoList {
+    display: flex;
+    width: $elementWidth;
+    margin: 100px auto;
+    flex-flow: column;
+    text-align: center;
+    gap: 10px;
+}
+
+.TodoItem {
+    display: flex;
+    height: $squareSize;
+}
+
+.l-button {
+    width: 100%;
+    height: $squareSize;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.s-button {
+    margin: auto 0 auto 5px;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+@media screen and (max-width: 1000px) {
+    h1 {
+        font-size: 120px;
+    }
+
+    button {
+        width: $squareSize * 3;
+        height: $squareSize * 3;
+        border: $borderSize * 2 solid $mainColor;
+    }
+
+    input[type=text] {
+        width: 50%;
+        font-size: 70px;
+    }
+
+    input[type=checkbox] {
+        width: $squareSize * 3;
+        height: $squareSize * 3;
+        margin-right: 30px;
+        border: $borderSize * 2 solid $mainColor;
+    }
+
+    .TodoList {
+        width: 90%;
+        gap: 30px;
+    }
+
+    .TodoItem {
+        height: $squareSize * 3;
+    }
+
+    .l-button {
+        height: $squareSize * 3;
+        font-size: 60px;
+    }
+
+    .s-button {
+        margin-left: 30px;
+        font-size: 70px;
+    }
 }
