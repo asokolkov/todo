@@ -14,7 +14,6 @@ export class TodoStore {
 
     constructor () {
         makeAutoObservable(this);
-        debugger
         const todoCookies = Cookies.get('todos');
         this.todos = todoCookies ? JSON.parse(todoCookies) : plug;
         this.activeTodos = this.todos;
