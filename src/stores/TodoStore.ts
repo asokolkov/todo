@@ -1,4 +1,4 @@
-import {action, makeObservable, observable} from 'mobx';
+import {makeAutoObservable} from 'mobx';
 import {v4 as uuid} from 'uuid';
 import {FilterType} from '../enums/filterType';
 import {TodosType} from '../types/todosTypes';
@@ -23,16 +23,7 @@ export class TodoStore {
     placeholder = 'Input task';
 
     constructor () {
-        makeObservable(this, {
-            todos: observable,
-            activeTodos: observable,
-            filters: observable,
-            addTodo: action,
-            removeTodo: action,
-            changeText: action,
-            toggleCompleted: action,
-            toggleFilter: action
-        });
+        makeAutoObservable(this);
     }
 
     addTodo(focus: boolean = true) {
@@ -54,14 +45,17 @@ export class TodoStore {
 
     toggleCompleted(id: string) {
         this.todos[id].completed = !this.todos[id].completed;
-        this.activeTodos = Object.fromEntries(Object.entries(this.todos)
-            .filter(([, todo]) => this.filters.current.func(todo)));
+        this.redrawActiveTodos();
     }
 
     toggleFilter() {
         const previousFilter = this.filters.current;
         this.filters.current = this.filters.other.pop()!;
         this.filters.other.unshift(previousFilter);
+        this.redrawActiveTodos();
+    }
+
+    redrawActiveTodos() {
         this.activeTodos = Object.fromEntries(Object.entries(this.todos)
             .filter(([, todo]) => this.filters.current.func(todo)));
     }

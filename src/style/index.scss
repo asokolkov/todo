@@ -38,6 +38,7 @@ h1 {
     margin: 0 auto 10px auto;
     font-weight: 800;
     font-size: 60px;
+    color: $mainColor;
 }
 
 button {
@@ -47,6 +48,7 @@ button {
     padding: 0;
     background-color: #fff;
     border: $borderSize solid $mainColor;
+    color: $mainColor;
     font: inherit;
     cursor: pointer;
     transition: $transitionTime;
@@ -63,6 +65,7 @@ input[type=text] {
     outline: 0;
     font-weight: 500;
     font-size: 20px;
+    color: $mainColor;
 }
 
 input[type=checkbox] {
