@@ -19,8 +19,8 @@ export class TodoFilter {
         this.currentIndex %= this.filters.length;
     }
 
-    isFirst() {
-        return this.currentIndex === 0;
+    setFirst() {
+        this.currentIndex = 0;
     }
 
     getCurrentType() {
