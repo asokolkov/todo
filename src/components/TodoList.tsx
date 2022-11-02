@@ -7,11 +7,15 @@ const TodoList = () => {
     const store = useContext(StoreContext);
 
     return (
-        <div>
+        <div className="TodoList">
             <h1>TodoList</h1>
-            <button onClick={() => store.toggleFilter()}>{store.filters.current.type}</button>
+            <button className="l-button" onClick={() => store.toggleFilter()}>
+                {store.filters.current.type}
+            </button>
             {Object.keys(store.activeTodos).map(id => <TodoItem key={id} id={id} />)}
-            <button onClick={() => store.addTodo()}>Add</button>
+            <button className="l-button" onClick={() => store.addTodo()}>
+                Add
+            </button>
         </div>
     );
 };
