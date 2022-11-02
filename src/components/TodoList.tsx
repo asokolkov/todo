@@ -10,7 +10,7 @@ const TodoList = () => {
         <div className="TodoList">
             <h1>TodoList</h1>
             <button className="l-button" onClick={() => store.toggleFilter()}>
-                {store.filters.current.type}
+                {store.filter.getCurrentType()}
             </button>
             {Object.keys(store.activeTodos).map(id => <TodoItem key={id} id={id} />)}
             <button className="l-button" onClick={() => store.addTodo()}>
