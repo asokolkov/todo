@@ -10,7 +10,6 @@ export class TodoStore {
     todos: TodosType;
     activeTodos: TodosType;
     filter = new TodoFilter();
-    placeholder = 'Input task';
 
     constructor () {
         makeAutoObservable(this);
