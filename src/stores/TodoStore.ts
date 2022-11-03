@@ -30,7 +30,6 @@ export class TodoStore {
         this.todos[id] = todo;
         this.activeTodos[id] = todo;
         this.filter.setFirst();
-        this.saveCookies();
         this.updateActiveTodos();
     }
 
