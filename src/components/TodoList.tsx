@@ -5,7 +5,7 @@ import {Observer} from 'mobx-react-lite';
 
 
 const TodoList = () => {
-    const store = new TodoStore();
+    const store = new TodoStore('cookies1');
 
     return (
         <Observer>

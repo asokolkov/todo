@@ -10,10 +10,12 @@ export class TodoStore {
     todos: TodosType;
     activeTodos: TodosType;
     filter = new TodoFilter();
+    cookiesId: string;
 
-    constructor () {
+    constructor(cookiesId: string) {
         makeAutoObservable(this);
-        const todoCookies = Cookies.get('todos');
+        this.cookiesId = cookiesId;
+        const todoCookies = Cookies.get(cookiesId);
         this.todos = todoCookies ? JSON.parse(todoCookies) : plug;
         this.activeTodos = this.todos;
     }
@@ -62,6 +64,6 @@ export class TodoStore {
     saveCookies() {
         const filledTodos = Object.fromEntries(Object.entries(this.todos)
             .filter(([, todo]) => todo.text));
-        Cookies.set('todos', JSON.stringify(filledTodos));
+        Cookies.set(this.cookiesId, JSON.stringify(filledTodos));
     }
 }
